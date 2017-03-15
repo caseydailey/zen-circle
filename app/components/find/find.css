@@ -16,3 +16,10 @@
 .character{
 	font-size: 15em;
 }
+
+#canvas{
+	margin-top: 50px;
+	text-align: center;
+	/*border: 2px solid red;*/
+}
+

@@ -14,25 +14,6 @@ app.factory("APIfactory", function($q, $http){
 	
 	};
 
-	// let getUsers = () => {
-	// 	let users = [];
-	// 	return $q((resolve, reject) => {
-	// 		$http.get(`${FBCreds.databaseURL}/users.json`)
-	// 		.then((results) => {
-	// 			let userArray = results.data;
-	// 			Object.keys(userArray).forEach((each) => {
-	// 				userArray[each].id = each;
-	// 				users.push(userArray[each]);
-	// 			});
-	// 			console.log("Users after filter: ", users);
-	// 			resolve(users);
-	// 		})
-	// 		.catch((error) => {
-	// 			reject(error);
-	// 		});
-	// 	});
-	// };
-
 
 	return {translate};
 
