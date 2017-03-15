@@ -1,0 +1,8 @@
+#canvas-container{
+	text-align: center;
+}
+
+#canvas{
+	border: 2px solid red;
+	align-self: center;
+}
