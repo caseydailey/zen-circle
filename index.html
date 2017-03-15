@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Zen Circle</title>
+
+<!-- style sheets -->
+	<link rel="stylesheet" type="text/css" href="lib/node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="app/components/login/login.css">
+	<link rel="stylesheet" type="text/css" href="app/components/home/home.css">
+	<link rel="stylesheet" type="text/css" href="app/components/find/find.css">
+	<link rel="stylesheet" type="text/css" href="app/components/make/make.css">
+<!-- / style sheets -->
+
+</head>
+
+
+<body data-ng-app="app">
+
+<!-- this is where the magic happens... -->
+
+<div data-ng-view></div>
+
+
+
+
+<!--  Third Party Js -->
+
+<script type="text/javascript" src="lib/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="lib/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/node_modules/firebase/firebase.js"></script>
+<script type="text/javascript" src="lib/node_modules/angular/angular.min.js"></script>
+<script type="text/javascript" src="lib/node_modules/angular-route/angular-route.min.js"></script>
+
+<!--  APP -->
+
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/app.routes.js"></script>
+<script type="text/javascript" src="app/app.run.js"></script>
+
+<!-- credentials -->
+<script type="text/javascript" src="credentials/db.creds.js"></script>
+<script type="text/javascript" src="credentials/api.creds.js"></script>
+
+<!-- db -->
+<script type="text/javascript" src="app/components/db/db.fac.js"></script>
+<script type="text/javascript" src="app/components/db/db.auth.js"></script>
+
+<!-- api -->
+<script type="text/javascript" src="app/components/api/api.fac.js"></script>
+
+<!-- login -->
+
+<script type="text/javascript" src="app/components/login/login.ctrl.js"></script>
+<script type="text/javascript" src="app/components/login/login.fac.js"></script>
+<script type="text/javascript" src="app/components/login/login.test.js"></script>
+
+<!-- home -->
+
+<script type="text/javascript" src="app/components/home/home.ctrl.js"></script>
+<script type="text/javascript" src="app/components/home/home.fac.js"></script>
+<script type="text/javascript" src="app/components/home/home.test.js"></script>
+
+<!-- find -->
+
+<script type="text/javascript" src="app/components/find/find.ctrl.js"></script>
+<script type="text/javascript" src="app/components/find/find.fac.js"></script>
+<script type="text/javascript" src="app/components/find/find.test.js"></script>
+
+<!-- make -->
+
+<script type="text/javascript" src="app/components/make/make.ctrl.js"></script>
+<script type="text/javascript" src="app/components/make/make.fac.js"></script>
+<script type="text/javascript" src="app/components/make/make.test.js"></script>
+
+
+
+
+</body>
+</html>

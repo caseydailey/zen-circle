@@ -1,0 +1,28 @@
+
+<!-- input -->
+<form class="navbar-form" role="search">
+  <div class="form-group">
+      <input autofocus="true" ng-keypress="enter($event)" type="text" class="form-control" placeholder="Search">
+      <!-- show on touch -->
+      <!-- <button  ng-click="googleIt($event)" type="button" class="btn btn-default">find</button> -->
+  </div>
+</form>
+
+<!-- display character -->
+<div class="row">
+    <!-- <div  ng-click="make(character)" ng-repeat="character in japanese track by $index" class="col-sm-12 col-md-6 col-lg-4 card">
+      <div class="thumbnail">
+  		<p class="character"> {{ character }} </p>
+  	  </a>
+	</div>  -->
+	<!-- <ul ng-repeat="character in japanese track by $index">
+		<li class="character"> {{ character }}</li>
+
+	</ul>-->
+
+	<p ng-repeat="character in japanese track by $index" class="character">{{character}}</p>
+
+</div>
+
+
+
