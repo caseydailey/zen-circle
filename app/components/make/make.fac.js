@@ -1,6 +1,6 @@
 "use strict";
 
-app.factory('MakeFactory', function($window, $location){
+app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 
 	var makeCharacter = [];
 
@@ -13,21 +13,21 @@ app.factory('MakeFactory', function($window, $location){
 		return makeCharacter;
 	};
 
-	// // create a pin within the pins object on FB
-	// 	let save = (drawing) => {
-	// 		return $q((resolve, reject) => {
-	// 			$http.post(`${FBCreds.databaseURL}/pins.json`,
-	// 			angular.toJson(pinObj))
-	// 			.then((result) => {
-	// 				resolve(result);
-	// 			})
-	// 			.catch((error) => {
-	// 				reject(error);
-	// 			});
-	// 		});
-	// 	};
+	let save = (drawing, userID) => {
+		return $q((resolve, reject) => {
+				$http.post(`${DBcreds.databaseURL}/users/${userID}.json`,
+				angular.toJson(drawing))
+				.then((result) => {
+					console.log(result);
+					resolve(result);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+			});
+		};
 
 
-	return{getCharacter, setCharacter};
+	return{getCharacter, setCharacter, save};
 
 });
