@@ -2,12 +2,13 @@
 
 
 
-app.controller('MakeCtrl', function($scope, MakeFactory) {
+app.controller('MakeCtrl', function($scope, MakeFactory, AuthFactory) {
         
         let s = $scope;
         let canvas = document.getElementById('canvas');
         let context = canvas.getContext('2d');
-
+        let userID = AuthFactory.getUserObj().uid; 
+        
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
     	    console.log('s.character:',s.character);
@@ -63,7 +64,6 @@ app.controller('MakeCtrl', function($scope, MakeFactory) {
             console.log('currentPath:', currentPath);
 
           }
-
           
         };
 
@@ -72,10 +72,12 @@ app.controller('MakeCtrl', function($scope, MakeFactory) {
           isDrawing = false;
         };
 
-        // s.save = function(){
-        //   var re
-        // }
- 		
+        s.save = function(){
+          console.log('drawing to save:', drawing);
+          MakeFactory.save(drawing, userID);
+        };
+
+        
 
  		// let x,y;
         	
