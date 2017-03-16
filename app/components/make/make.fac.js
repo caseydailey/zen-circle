@@ -13,6 +13,21 @@ app.factory('MakeFactory', function($window, $location){
 		return makeCharacter;
 	};
 
+	// // create a pin within the pins object on FB
+	// 	let save = (drawing) => {
+	// 		return $q((resolve, reject) => {
+	// 			$http.post(`${FBCreds.databaseURL}/pins.json`,
+	// 			angular.toJson(pinObj))
+	// 			.then((result) => {
+	// 				resolve(result);
+	// 			})
+	// 			.catch((error) => {
+	// 				reject(error);
+	// 			});
+	// 		});
+	// 	};
+
+
 	return{getCharacter, setCharacter};
 
 });

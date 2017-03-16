@@ -6,19 +6,75 @@ app.controller('MakeCtrl', function($scope, MakeFactory) {
         
         let s = $scope;
         let canvas = document.getElementById('canvas');
-        let ctx = canvas.getContext('2d');
+        let context = canvas.getContext('2d');
 
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
     	    console.log('s.character:',s.character);
-        	ctx.font = "300px serif";
-        	ctx.textAlign="center";
-        	ctx.strokeText(s.character[0], 200, 300);
+        	context.font = "300px serif";
+        	context.textAlign="center";
+        	context.strokeText(s.character[0], 200, 300);
         	
         };
 
         s.display();
 
+
+
+        var isDrawing, x, y;
+        var drawing = [];
+        var currentPath = [];
+
+        function startPath() {
+          currentPath = [];
+          console.log('currentPath:', currentPath);
+        }
+
+        function endPath() {
+          drawing.push(currentPath);
+          console.log('drawing:', drawing);
+        }
+
+
+        canvas.onmousedown = function($event) {
+
+          startPath();
+
+          isDrawing = true;
+          x = $event.offsetX;
+          y = $event.offsetY;
+          context.moveTo(x,y);
+
+        };
+
+        canvas.onmousemove = function($event) {
+          if (isDrawing) {
+            x = $event.offsetX;
+            y = $event.offsetY;
+            context.lineTo(x,y);
+            context.stroke();
+
+            var point = {
+              x: x,
+              y: y 
+            };
+            
+            currentPath.push(point);
+            console.log('currentPath:', currentPath);
+
+          }
+
+          
+        };
+
+        canvas.onmouseup = function() {
+          endPath();
+          isDrawing = false;
+        };
+
+        // s.save = function(){
+        //   var re
+        // }
  		
 
  		// let x,y;
