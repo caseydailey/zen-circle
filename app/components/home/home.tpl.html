@@ -1,53 +1,24 @@
   
 <!-- heading -->
-  <div class="jumbotron">
-  <div id="user-info">
+  
+  <div id="user-info" ng-model="userObj">
   	<div class="hanko">
   	ケー<br>シー	
   	</div>
-    <h1 id="user-name"> Casey Dailey </h1>
+    <h1 id="user-name"> {{ userObj.displayName }} </h1>
   </div>
-</div>
 
-  <div class="row card-container">
-  <!-- card -->
-    <div class="col-sm-6 col-md-4 card">
-      <div class="thumbnail">
-        <img ng-src="/zen-circle-images/breath.jpg" alt="">
-        
-      </div>
+<!-- card container -->
+  <!-- <div class="row card-container"  >
+    <div class="col-sm-6 col-md-4 card" ng-repeat="drawing in paths">
+        <canvas class="canvas" width="400" height="400" id="{{ drawing.drawingID }}"></canvas>     
     </div> 
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <img ng-src="/zen-circle-images/breath.jpg" alt="">
+  </div> -->
+        <!-- <h1 id="{{ $index }}">hi brenda. thank you!</h1> -->
         
-      </div>
-    </div> 
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <img ng-src="/zen-circle-images/breath.jpg" alt="">
-        
-      </div>
-    </div> 
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <img ng-src="/zen-circle-images/breath.jpg" alt="">
-        
-      </div>
-    </div> 
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <img ng-src="/zen-circle-images/breath.jpg" alt="">
-        
-      </div>
-    </div> 
-    <div class="col-sm-6 col-md-4">
-      <div class="thumbnail">
-        <img ng-src="/zen-circle-images/breath.jpg" alt="">
-        
-      </div>
-    </div> 
-  <!-- end card -->
+        <canvas class="canvas" width="400" height="400" id="canvas"></canvas>     
+
+<!-- / card container -->
 
   <h1>home is connected</h1>
   <a ng-href="#!/find">click to go to find</a>

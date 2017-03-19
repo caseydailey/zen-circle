@@ -6,158 +6,106 @@ app.controller('MakeCtrl', function($scope, MakeFactory, AuthFactory) {
         
         let s = $scope;
         let canvas = document.getElementById('canvas');
-        let context = canvas.getContext('2d');
+        let ctx = canvas.getContext('2d');
         let userID = AuthFactory.getUserObj().uid; 
         
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
     	    console.log('s.character:',s.character);
-        	context.font = "300px serif";
-        	context.textAlign="center";
-        	context.strokeText(s.character[0], 200, 300);
+        	ctx.font = "300px serif";
+        	ctx.textAlign="center";
+        	ctx.strokeText(s.character[0], 200, 300);
         	
         };
 
         s.display();
 
 
-
-        var isDrawing, x, y;
-        var drawing = [];
-        var currentPath = [];
-
-        function startPath() {
-          currentPath = [];
-          console.log('currentPath:', currentPath);
-        }
-
-        function endPath() {
-          drawing.push(currentPath);
-          console.log('drawing:', drawing);
-        }
-
-
-        canvas.onmousedown = function($event) {
-
-          startPath();
-
-          isDrawing = true;
-          x = $event.offsetX;
-          y = $event.offsetY;
-          context.moveTo(x,y);
-
-        };
-
-        canvas.onmousemove = function($event) {
-          if (isDrawing) {
-            x = $event.offsetX;
-            y = $event.offsetY;
-            context.lineTo(x,y);
-            context.stroke();
-
-            var point = {
-              x: x,
-              y: y 
-            };
-            
-            currentPath.push(point);
-            console.log('currentPath:', currentPath);
-
-          }
-          
-        };
-
-        canvas.onmouseup = function() {
-          endPath();
-          isDrawing = false;
-        };
-
         s.save = function(){
           console.log('drawing to save:', drawing);
-          MakeFactory.save(drawing, userID);
+          let data = {
+
+            uid: userID,
+            drawing: drawing
+
+          };
+          console.log('data:', data);
+          MakeFactory.save(data);
         };
 
+  //drawing
+
+  //basic characteristics of the line
+    ctx.lineWidth = 10;
+    ctx.lineJoin = ctx.lineCap = 'round';
+
+    var isDrawing, lastPoint;
+    var drawing = [];
+    var currentPath = [];
+
+//called on mousedown
+    function startPath() {
+      currentPath = [];
+    }
+//called on mouse up
+    function endPath() {
+      drawing.push(currentPath);
+      console.log('drawing:', drawing);
+    }
+
+//clears path, sets drawing to true, initialize a point object            
+    canvas.onmousedown = function($event) {
+      startPath();
+      isDrawing = true;
+      lastPoint = { x: $event.offsetX, y: $event.offsetY };
+    };
+
+//begins path and creates multiple paths offset from x and y with variable opacity
+
+    canvas.onmousemove = function($event) {
+
+      if (!isDrawing) return;
+
+      ctx.beginPath();
+      
+      ctx.globalAlpha = 1;
+      ctx.moveTo(lastPoint.x - 4, lastPoint.y - 4);
+      ctx.lineTo($event.offsetX - 4, $event.offsetY - 4);
+      ctx.stroke();
+      
+      ctx.globalAlpha = 0.6;
+      ctx.moveTo(lastPoint.x - 2, lastPoint.y - 2);
+      ctx.lineTo($event.offsetX - 2, $event.offsetY - 2);
+      ctx.stroke();
+      
+      ctx.globalAlpha = 0.4;
+      ctx.moveTo(lastPoint.x, lastPoint.y);
+      ctx.lineTo($event.offsetX, $event.offsetY);
+      ctx.stroke();
+      
+      ctx.globalAlpha = 0.3;
+      ctx.moveTo(lastPoint.x + 2, lastPoint.y + 2);
+      ctx.lineTo($event.offsetX + 2, $event.offsetY + 2);
+      ctx.stroke();
+      
+      ctx.globalAlpha = 0.2;
+      ctx.moveTo(lastPoint.x + 4, lastPoint.y + 4);
+      ctx.lineTo($event.offsetX + 4, $event.offsetY + 4);
+      ctx.stroke();
         
+      lastPoint = { x: $event.offsetX, y: $event.offsetY };
 
- 		// let x,y;
-        	
-   //      	function midPointBtw(p1, p2) {
-   //      	  return {
-   //      	    x: p1.x + (p2.x - p1.x) / 2,
-   //      	    y: p1.y + (p2.y - p1.y) / 2
-   //      	  };
+      currentPath.push(lastPoint);
 
-   //      	}
+    };
 
-   //      	ctx.lineWidth = 1;
-   //      	ctx.lineJoin = ctx.lineCap = 'round';
+    canvas.onmouseup = function() {
+      endPath();
+      isDrawing = false;
+    };
 
-   //      	var isDrawing, points = [];
 
-   //      	canvas.onmousedown = function(e) {
-   //      	  isDrawing = true;
-   //      	  points.push({ x: e.clientX, y: e.clientY });
-   //      	  console.log("x:", x);
-   //      	  console.log("y:", y);
-   //      	};
-
-   //      	canvas.onmousemove = function(e) {
-   //      	  if (!isDrawing) return;
-        	  
-   //      	  points.push({ x: e.clientX, y: e.clientY });
-   //      	  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        	  
-   //      	  ctx.strokeStyle = 'rgba(0,0,0,1)';
-   //      	  stroke(offsetPoints(-4));
-   //      	  ctx.strokeStyle = 'rgba(0,0,0,0.8)';
-   //      	  stroke(offsetPoints(-2));
-   //      	  ctx.strokeStyle = 'rgba(0,0,0,0.6)';
-   //      	  stroke(points);
-   //      	  ctx.strokeStyle = 'rgba(0,0,0,0.4)';
-   //      	  stroke(offsetPoints(2));
-   //      	  ctx.strokeStyle = 'rgba(0,0,0,0.2)';
-   //      	  stroke(offsetPoints(4));
-   //      	};
-
-   //      	function offsetPoints(val) {
-   //      	  var offsetpoints = [];
-   //      	  for (var i = 0; i < points.length; i++) {
-   //      	    offsetpoints.push({ 
-   //      	      x: points[i].x + val,
-   //      	      y: points[i].y + val
-   //      	    });
-   //      	  }
-   //      	  return offsetpoints;
-   //      	}
-
-   //      	function stroke(points) {
-
-   //      	  var p1 = points[0];
-   //      	  var p2 = points[1];
-        	  
-   //      	  ctx.beginPath();
-   //      	  ctx.moveTo(p1.x, p1.y);
-
-   //      	  for (var i = 1, len = points.length; i < len; i++) {
-   //      	    // we pick the point between pi+1 & pi+2 as the
-   //      	    // end point and p1 as our control point
-   //      	    var midPoint = midPointBtw(p1, p2);
-   //      	    ctx.quadraticCurveTo(p1.x, p1.y, midPoint.x, midPoint.y);
-   //      	    p1 = points[i];
-   //      	    p2 = points[i+1];
-   //      	  }
-   //      	  // Draw last line as a straight line while
-   //      	  // we wait for the next point to be able to calculate
-   //      	  // the bezier control point
-   //      	  ctx.lineTo(p1.x, p1.y);
-   //      	  ctx.stroke();
-   //      	}
-
-   //      	canvas.onmouseup = function() {
-   //      	  isDrawing = false;
-   //      	  points.length = 0;
-   //      	};
-        });
+});
 
 
 

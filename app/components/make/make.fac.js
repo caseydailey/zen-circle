@@ -13,9 +13,9 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 		return makeCharacter;
 	};
 
-	let save = (drawing, userID) => {
+	let save = (drawing) => {
 		return $q((resolve, reject) => {
-				$http.post(`${DBcreds.databaseURL}/users/${userID}.json`,
+				$http.post(`${DBcreds.databaseURL}/drawings.json`,
 				angular.toJson(drawing))
 				.then((result) => {
 					console.log(result);
