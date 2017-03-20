@@ -1,55 +1,66 @@
 "use strict";
 
-app.controller('HomeCtrl', function($scope, AuthFactory, HomeFactory) {
+app.controller('HomeCtrl', function($scope, $timeout, AuthFactory, HomeFactory) {
         
         let s = $scope;
         s.userObj = AuthFactory.getUserObj();
-        // let canvas = 1;
+        let canvas = null;
         s.paths = [];
+
+        let callPrint = function(){
+          console.log('callPrint fired');
+          s.print(s.paths);
+        }
 
         //returns an array of ids
         HomeFactory.getDrawings(s.userObj.uid)
         	.then((myDrawings)=>{
         		myDrawings.forEach((drawing)=>{
         		s.paths.push(drawing);
-        	});
-        		console.log('s.paths:', s.paths);
-        		s.print(s.paths);
+          });
+
+            console.log('s.paths:', s.paths);
+            // setTimeout(callPrint, 250);
+            $timeout(callPrint);
+            
         });
+
+
         
 
-				
+         // s.print = function(paths){
+          
+        	// console.log('paths to print:', paths);
         	
+        	// paths.forEach((drawing)=>{
 
-        //  s.print = function(paths){
-        	
-        // 	console.log('paths to print:', paths);
-        	
-        // 	paths.forEach((drawing)=>{
+        	//     canvas = document.getElementById(`${drawing.drawingID}`);
 
-        // 	    canvas = document.getElementById(`${drawing.drawingID}`);
+        	// 	console.log('drawing', drawing);
+        	// 	console.log('drawing.drawingID:', drawing.drawingID);
+        	// 	console.log('${drawing.drawingID}', canvas);
 
-        // 		console.log('drawing', drawing);
-        // 		console.log('drawing.drawingID:', drawing.drawingID);
-        // 		console.log('${drawing.drawingID}', canvas);
 
-        // 	});
+
+        	// });
         // };
         
         s.print = function(drawingObj){
 
+            
 
-        	  var currentPoint, offsetPoints;
-        	  var canvas = document.getElementById('canvas');
-        	  var ctx = canvas.getContext('2d');
-        	  let drawing = drawingObj[1].drawing;
-        	  
-        	  ctx.lineWidth = 10;
-        	  ctx.lineJoin = ctx.lineCap = 'round';
- 
+            drawingObj.forEach((drawing)=>{
 
-        	  drawing.forEach((path)=>{
+        	  canvas = document.getElementById(`${drawing.drawingID}`);
+            let currentDrawing = drawing.drawing;
+            let currentPoint, offsetPoints;
+            let ctx = canvas.getContext('2d');
+                ctx.lineWidth = 10;
+                ctx.lineJoin = ctx.lineCap = 'round';
+            
           	  
+            currentDrawing.forEach((path)=>{
+
               path.forEach((point)=>{
 
         	  		  currentPoint = { x: point.x, y: point.y };
@@ -81,10 +92,8 @@ app.controller('HomeCtrl', function($scope, AuthFactory, HomeFactory) {
               	      ctx.lineTo(currentPoint.x + 4, currentPoint.y + 4);
               	      ctx.stroke();
 
-
-              });
-              
-          
+                    });
+                });
             });
           
         };
