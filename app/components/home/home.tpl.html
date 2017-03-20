@@ -11,17 +11,13 @@
 <!-- card container -->
   <div class="row card-container"  >
     <div class="col-sm-6 col-md-4 card" ng-repeat="drawing in paths">
-        <canvas class="canvas" width="400" height="400" id="{{ drawing.drawingID }}"></canvas>     
+        <a ng-click="edit(drawing)"><canvas class="canvas" width="400" height="400" id="{{ drawing.drawingID }}"></canvas></a>   
     </div> 
   </div>
-        <!-- <h1 id="{{ $index }}">hi brenda. thank you!</h1> -->
-        
-        <!-- <canvas class="canvas" width="400" height="400" id="canvas"></canvas>      -->
 
-<!-- / card container -->
 
-  <h1>home is connected</h1>
-  <a ng-href="#!/find">click to go to find</a>
+  
+  <a ng-href="#!/find" class="hanko">go to find page</a>
 
 
 

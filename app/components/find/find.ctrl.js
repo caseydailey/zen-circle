@@ -24,15 +24,10 @@ app.controller('FindCtrl', function($scope, $window, $location, APIfactory, APIc
 
 	//takes the split from googleIt and maps it to scope
 	s.display = function(japaneseArray){
-			// let canvas = document.getElementById('canvas');
-			// let ctx = canvas.getContext('2d');
 			s.japanese =[];
 			japaneseArray.map((char)=> s.japanese.push(char));
 			console.log('s.japanese:', s.japanese);
-			// ctx.font = "300px serif";
-			// ctx.textAlign="center";
-			// ctx.strokeText(s.japanese[0], 200, 300);
-
+			
 	};
 
 

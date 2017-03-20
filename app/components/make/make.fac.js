@@ -3,6 +3,7 @@
 app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 
 	var makeCharacter = [];
+	var editDrawing;
 
 	let setCharacter = function(character){
 		console.log('character in makeFactory:', character);
@@ -11,6 +12,16 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 	
 	let getCharacter = function(character){
 		return makeCharacter;
+	};
+
+	let setDrawing = function(drawingobj){
+		editDrawing = drawingobj.drawing;
+		console.log('editDrawing:', editDrawing);
+	};
+
+	let getDrawing = function(){
+		console.log('returning this from make.fac:', editDrawing);
+		return editDrawing;
 	};
 
 	let save = (drawing) => {
@@ -28,6 +39,6 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 		};
 
 
-	return{getCharacter, setCharacter, save};
+	return{getCharacter, setCharacter, save, setDrawing, getDrawing};
 
 });
