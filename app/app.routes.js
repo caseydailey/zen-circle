@@ -38,6 +38,11 @@ app.config(function($routeProvider) {
     		controller: 'MakeCtrl',
     		resolve: {isAuth}
     	})
+        .when('/edit', {
+            templateUrl: 'app/components/edit/edit.tpl.html',
+            controller: 'EditCtrl',
+            resolve: {isAuth}
+        })
     	.otherwise('/');
 
     });

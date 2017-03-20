@@ -12,30 +12,43 @@ app.controller('MakeCtrl', function($scope, MakeFactory, AuthFactory) {
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
     	    console.log('s.character:',s.character);
+          if(s.character.length > 1){
+            s.character.pop();
+            console.log(s.character);
+            return s.character;
+          } else {
         	ctx.font = "300px serif";
         	ctx.textAlign="center";
         	ctx.strokeText(s.character[0], 200, 300);
-        	
+        	}
         };
 
         s.display();
 
 
         s.save = function(){
-          console.log('drawing to save:', drawing);
-          let data = {
-
+          let drawingData = {
             uid: userID,
             drawing: drawing
-
           };
-          console.log('data:', data);
-          MakeFactory.save(data);
+          MakeFactory.save(drawingData);
         };
 
-  //drawing
+        s.removeLastStroke = function(){
+          let lastPath = drawing.length-1;
+          drawing.splice(lastPath);
+          s.render(drawing);
+        };
 
-  //basic characteristics of the line
+        s.deleteAttempt = function(){
+          ctx.clearRect(0,0, 400, 400);
+          s.display();
+        };
+
+
+//drawing
+
+//basic characteristics of the line
     ctx.lineWidth = 10;
     ctx.lineJoin = ctx.lineCap = 'round';
 
@@ -104,6 +117,51 @@ app.controller('MakeCtrl', function($scope, MakeFactory, AuthFactory) {
       isDrawing = false;
     };
 
+    s.render = function(drawing){
+          
+          ctx.clearRect(0,0, 400, 400);
+          s.display();
+
+          let currentPoint;
+
+          drawing.forEach((path)=>{
+
+            path.forEach((point)=>{
+
+                currentPoint = { x: point.x, y: point.y };
+          
+                    ctx.beginPath();
+                    
+                    ctx.globalAlpha = 1;
+                    ctx.moveTo(currentPoint.x - 4, currentPoint.y - 4);
+                    ctx.lineTo(currentPoint.x - 4, currentPoint.y - 4);
+                    ctx.stroke();
+                    
+                    ctx.globalAlpha = 0.6;
+                    ctx.moveTo(currentPoint.x - 2, currentPoint.y - 2);
+                    ctx.lineTo(currentPoint.x - 2, currentPoint.y - 2);
+                    ctx.stroke();
+                    
+                    ctx.globalAlpha = 0.4;
+                    ctx.moveTo(currentPoint.x, currentPoint.y);
+                    ctx.lineTo(currentPoint.x, currentPoint.y);
+                    ctx.stroke();
+                    
+                    ctx.globalAlpha = 0.3;
+                    ctx.moveTo(currentPoint.x + 2, currentPoint.y + 2);
+                    ctx.lineTo(currentPoint.x + 2, currentPoint.y + 2);
+                    ctx.stroke();
+                    
+                    ctx.globalAlpha = 0.2;
+                    ctx.moveTo(currentPoint.x + 4, currentPoint.y + 4);
+                    ctx.lineTo(currentPoint.x + 4, currentPoint.y + 4);
+                    ctx.stroke();
+
+                  });
+              });
+            };
+
+            
 
 });
 

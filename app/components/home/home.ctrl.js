@@ -1,7 +1,7 @@
 "use strict";
 
-app.controller('HomeCtrl', function($scope, $timeout, AuthFactory, HomeFactory) {
-        
+app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFactory, HomeFactory, MakeFactory) {
+ console.log('hello?');       
         let s = $scope;
         s.userObj = AuthFactory.getUserObj();
         let canvas = null;
@@ -10,7 +10,7 @@ app.controller('HomeCtrl', function($scope, $timeout, AuthFactory, HomeFactory) 
         let callPrint = function(){
           console.log('callPrint fired');
           s.print(s.paths);
-        }
+        };
 
         //returns an array of ids
         HomeFactory.getDrawings(s.userObj.uid)
@@ -20,34 +20,19 @@ app.controller('HomeCtrl', function($scope, $timeout, AuthFactory, HomeFactory) 
           });
 
             console.log('s.paths:', s.paths);
-            // setTimeout(callPrint, 250);
             $timeout(callPrint);
             
         });
 
+          s.edit = function(drawing){
+            console.log('s.edit running');
+            MakeFactory.setDrawing(drawing);
+            $window.location.href = '#!/edit';
 
-        
+          };
 
-         // s.print = function(paths){
-          
-        	// console.log('paths to print:', paths);
-        	
-        	// paths.forEach((drawing)=>{
-
-        	//     canvas = document.getElementById(`${drawing.drawingID}`);
-
-        	// 	console.log('drawing', drawing);
-        	// 	console.log('drawing.drawingID:', drawing.drawingID);
-        	// 	console.log('${drawing.drawingID}', canvas);
-
-
-
-        	// });
-        // };
         
         s.print = function(drawingObj){
-
-            
 
             drawingObj.forEach((drawing)=>{
 
