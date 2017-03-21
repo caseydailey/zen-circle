@@ -3,10 +3,11 @@
 app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 
 	var makeCharacter = [];
+	var drawingObj;
 	var editDrawing;
 
+//getters and setters
 	let setCharacter = function(character){
-		console.log('character in makeFactory:', character);
 		makeCharacter.push(character[0]);
 	};
 	
@@ -15,14 +16,20 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 	};
 
 	let setDrawing = function(drawingobj){
+		drawingObj = drawingobj;
 		editDrawing = drawingobj.drawing;
-		console.log('editDrawing:', editDrawing);
+	};
+
+	let getDrawingObj = function(){
+		return drawingObj;
 	};
 
 	let getDrawing = function(){
 		console.log('returning this from make.fac:', editDrawing);
 		return editDrawing;
 	};
+
+//save, update, delete
 
 	let save = (drawing) => {
 		return $q((resolve, reject) => {
@@ -38,7 +45,19 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 			});
 		};
 
+	let deleteDrawing = function(drawingID) {
+		return $q((resolve, reject) => {
+			$http.delete(`${DBcreds.databaseURL}/drawings/${drawingID}.json`)
+		})
+	};
 
-	return{getCharacter, setCharacter, save, setDrawing, getDrawing};
+	let patchDrawing = function(drawingID, drawing){
+		return $q((resolve, reject)=>{
+			$http.patch(`${DBcreds.databaseURL}/drawings/${drawingID}.json`,
+				angular.toJson(drawing))
+		})
+	}
+
+	return{getCharacter, setCharacter, save, setDrawing, getDrawing, deleteDrawing, getDrawingObj};
 
 });

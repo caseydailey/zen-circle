@@ -15,7 +15,9 @@ app.controller('MakeCtrl', function($scope, MakeFactory, AuthFactory) {
           if(s.character.length > 1){
             s.character.pop();
             console.log(s.character);
-            return s.character;
+            ctx.font = "300px serif";
+            ctx.textAlign="center";
+            ctx.strokeText(s.character[0], 200, 300);
           } else {
         	ctx.font = "300px serif";
         	ctx.textAlign="center";
