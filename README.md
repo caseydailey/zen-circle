@@ -18,10 +18,9 @@
 
 #### Project Goals
 
-  The focus of this project is to provide the user with a unique and enjoyable experience.
-  The process should be simple, enjoyable, and useful.
+  The focus of this project is to provide the user with a simple, unique, and enjoyable experience.
+
   
-  My hope is that a user will find some peace and satisfaction in the art of Japanese calligraphy.
 
 
 
