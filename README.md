@@ -1,5 +1,5 @@
 
-#Zen Circle calligraphy
+# Zen Circle calligraphy
 
 ## My Final Project for the Front-End program at Nashville Software School 
 
