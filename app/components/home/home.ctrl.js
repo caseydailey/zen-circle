@@ -1,7 +1,7 @@
 "use strict";
 
 app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFactory, HomeFactory, MakeFactory) {
- console.log('hello?');       
+       
         let s = $scope;
         s.userObj = AuthFactory.getUserObj();
         let canvas = null;

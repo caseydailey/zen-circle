@@ -138,12 +138,9 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 	        s.printEdit();
 	         
 
-	        s.save = function(){
-	          let drawingData = {
-	            uid: userID,
-	            drawing: drawing
-	          };
-	          MakeFactory.save(drawingData);
+	        s.patch = function(){
+	          let drawingID = MakeFactory.getDrawingObj().drawingID;
+	          MakeFactory.patchDrawing(drawingID, drawing);
 	        };
 
 	        s.removeLastStroke = function(){
@@ -158,6 +155,15 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 	          ctx.clearRect(0,0, 400, 400);
 	          s.save();
 	          $window.location.href = '#!/home';
+	        };
+
+	        s.deleteDrawing = function() {
+	        	let drawingID = MakeFactory.getDrawingObj().drawingID;
+	        	console.log('deleting this drawing:', drawingID);
+	        	MakeFactory.deleteDrawing(drawingID);
+	        	ctx.clearRect(0,0, 400, 400);
+				
+
 	        };
 
 

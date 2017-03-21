@@ -1,20 +1,22 @@
 "use strict";
 
 app.factory('HomeFactory', function($q, $http, DBcreds, AuthFactory){
+	var myDrawings = [];
 	
+	let assignIDs = function(drawings){
+		let drawingsData = drawings.data;
+		Object.keys(drawingsData).forEach((drawing)=> {
+			drawingsData[drawing].drawingID = drawing;
+			myDrawings.push(drawingsData[drawing]);
+		});
+	};
+
 		//gets the ids of users drawings
 		let getDrawings = (userID) => {
 			return $q((resolve, reject) => {
 				$http.get(`${DBcreds.databaseURL}/drawings.json?orderBy="uid"&equalTo="${userID}"`)
 				.then((drawings) => {
-					// console.log('fb drawings:', drawings);
-					let drawingsData = drawings.data;
-					// console.log('drawingsData:', drawingsData);
-					let myDrawings = [];
-					Object.keys(drawingsData).forEach((drawing)=> {
-						drawingsData[drawing].drawingID = drawing;
-						myDrawings.push(drawingsData[drawing]);
-					});
+					assignIDs(drawings);
 			        console.log('myDrawings:', myDrawings);
 			        resolve(myDrawings);
 				})
