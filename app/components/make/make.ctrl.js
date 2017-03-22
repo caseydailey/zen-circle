@@ -2,26 +2,37 @@
 
 
 
-app.controller('MakeCtrl', function($scope, MakeFactory, AuthFactory) {
+app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
         
         let s = $scope;
         let canvas = document.getElementById('canvas');
         let ctx = canvas.getContext('2d');
         let userID = AuthFactory.getUserObj().uid; 
+        var background;
         
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
     	    console.log('s.character:',s.character);
           if(s.character.length > 1){
-            s.character.pop();
+            s.character.shift();
             console.log(s.character);
             ctx.font = "300px serif";
             ctx.textAlign="center";
             ctx.strokeText(s.character[0], 200, 300);
+            background = canvas.toDataURL();
+            ctx.clearRect(0,0, 400, 400);
+            console.log('background:', background);
+            canvas.style.backgroundImage = `url(${background})`;
+
           } else {
-        	ctx.font = "300px serif";
-        	ctx.textAlign="center";
-        	ctx.strokeText(s.character[0], 200, 300);
+          ctx.font = "300px serif";
+          ctx.textAlign="center";
+          ctx.strokeText(s.character[0], 200, 300);
+          background = canvas.toDataURL();
+          ctx.clearRect(0,0, 400, 400);
+          console.log('background:', background);
+          canvas.style.backgroundImage = `url(${background})`;
+
         	}
         };
 
@@ -29,11 +40,17 @@ app.controller('MakeCtrl', function($scope, MakeFactory, AuthFactory) {
 
 
         s.save = function(){
-          let drawingData = {
+          var dataURL = canvas.toDataURL();
+          console.log(dataURL);
+          var drawingData = {
             uid: userID,
-            drawing: drawing
+            drawing: drawing,
+            img: dataURL
           };
-          MakeFactory.save(drawingData);
+          MakeFactory.save(drawingData).then(()=>{
+            $window.location.href = '#!/home';
+          });
+          
         };
 
         s.removeLastStroke = function(){

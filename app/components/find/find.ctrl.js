@@ -27,7 +27,12 @@ app.controller('FindCtrl', function($scope, $window, $location, APIfactory, APIc
 			s.japanese =[];
 			japaneseArray.map((char)=> s.japanese.push(char));
 			console.log('s.japanese:', s.japanese);
-			
+	// 		var canvas = document.getElementById('canvas');
+	// 		var ctx = canvas.getContext('2d');
+	// 		ctx.font = "300px serif";
+	// 		ctx.textAlign="center";
+	// 		ctx.strokeText(s.japanese [0], 200, 300);
+	// 		s.character = canvas.toDataURL();
 	};
 
 
