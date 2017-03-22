@@ -47,16 +47,16 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 
 	let deleteDrawing = function(drawingID) {
 		return $q((resolve, reject) => {
-			$http.delete(`${DBcreds.databaseURL}/drawings/${drawingID}.json`)
-		})
+			$http.delete(`${DBcreds.databaseURL}/drawings/${drawingID}.json`);
+		});
 	};
 
 	let patchDrawing = function(drawingID, drawing){
 		return $q((resolve, reject)=>{
 			$http.patch(`${DBcreds.databaseURL}/drawings/${drawingID}.json`,
-				angular.toJson(drawing))
-		})
-	}
+				angular.toJson(drawing));
+		});
+	};
 
 	return{getCharacter, setCharacter, save, setDrawing, getDrawing, deleteDrawing, getDrawingObj};
 
