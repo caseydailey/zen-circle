@@ -5,8 +5,19 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 	var makeCharacter = [];
 	var drawingObj;
 	var editDrawing;
+	var word;
 
 //getters and setters
+	
+	let setWord = function(w){
+		word = w;
+	};
+
+	let getWord = function(){
+		return word;
+	};
+
+
 	let setCharacter = function(character){
 		makeCharacter.push(character[0]);
 	};
@@ -58,6 +69,6 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 		});
 	};
 
-	return{getCharacter, setCharacter, save, setDrawing, getDrawing, deleteDrawing, getDrawingObj};
+	return{getCharacter, setCharacter, save, setDrawing, getDrawing, deleteDrawing, getDrawingObj, setWord, getWord};
 
 });

@@ -1,9 +1,26 @@
-<h1>edit</h1>
-<div id="canvas-container">
-<canvas  id="canvas" width="400" height="400"></canvas>
-</div>
 
-<button type="button" ng-click="patchDrawing()">Save</button>
-<button type="button" ng-click="removeLastStroke()">remove last stroke</button>
-<button type="button" ng-click="deleteDrawing()">delete</button>
-<a href="#!/home"><button type="button">back</button></a>
+
+
+
+  <div class="col-sm-6 col-md-4  card" ng-mouseout="offCanvas = true" ng-mouseover="offCanvas = false">
+  <div class="">
+     <canvas  id="canvas" width="400" height="400"></canvas>
+      <div class="caption">
+        <h3>{{ word }}</h3>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+
+<a ng-if="offCanvas" class="btn btn-default" type="a" ng-click="patchDrawing()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></a>
+<a ng-if="offCanvas" class="btn btn-default" type="a" ng-click="removeLastStroke()"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></a>
+<a ng-if="offCanvas" class="btn btn-default" type="a" ng-click="deleteDrawing()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+<a href="#!/home">
+<a ng-if="offCanvas" class="btn btn-default" type="a" ng-href="#!/home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+</a>
+
+

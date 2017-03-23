@@ -6,6 +6,7 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 	let canvas = document.getElementById('canvas');
 	let ctx = canvas.getContext('2d');
 	let userID = AuthFactory.getUserObj().uid;
+	s.offCanvas = false;
 
 	
 

@@ -9,6 +9,8 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
         let ctx = canvas.getContext('2d');
         let userID = AuthFactory.getUserObj().uid; 
         var background;
+        s.word = MakeFactory.getWord();
+        s.offCanvas = false;
         
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
@@ -45,9 +47,11 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
           var drawingData = {
             uid: userID,
             drawing: drawing,
-            img: dataURL
+            img: dataURL,
+            word: s.word
           };
           MakeFactory.save(drawingData).then(()=>{
+          setTimeout(500);
             $window.location.href = '#!/home';
           });
           
