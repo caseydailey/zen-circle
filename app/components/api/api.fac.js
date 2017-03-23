@@ -6,6 +6,7 @@ app.factory("APIfactory", function($q, $http){
 			return $q((resolve, reject) => {
 	$http.get(`https://translation.googleapis.com/language/translate/v2?key=${APIcreds.key}&source=en&target=ja&q=${word}`)
 		 .then((data)=> {
+		 	console.log('data:',data);
 		 	var japanese = data.data.data.translations[0].translatedText;
 		 	console.log("japanese: ", japanese);
 		 	resolve(japanese);

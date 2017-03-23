@@ -5,6 +5,8 @@ app.factory('HomeFactory', function($q, $http, DBcreds, AuthFactory){
 	
 	let assignIDs = function(drawings){
 		let drawingsData = drawings.data;
+		myDrawings = [];
+		console.log('myDrawings line 9:', myDrawings);
 		Object.keys(drawingsData).forEach((drawing)=> {
 			drawingsData[drawing].drawingID = drawing;
 			myDrawings.push(drawingsData[drawing]);
@@ -17,7 +19,7 @@ app.factory('HomeFactory', function($q, $http, DBcreds, AuthFactory){
 				$http.get(`${DBcreds.databaseURL}/drawings.json?orderBy="uid"&equalTo="${userID}"`)
 				.then((drawings) => {
 					assignIDs(drawings);
-			        console.log('myDrawings:', myDrawings);
+			        console.log('myDrawings line 22:', myDrawings);
 			        resolve(myDrawings);
 				})
 				.catch((error) => {

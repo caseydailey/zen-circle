@@ -6,22 +6,22 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
         s.userObj = AuthFactory.getUserObj();
         let canvas = null;
         s.paths = [];
+        s.hover=false;
 
-        let callPrint = function(){
-          console.log('callPrint fired');
-          s.print(s.paths);
-        };
+        // let callPrint = function(){
+        //   console.log('callPrint fired');
+        //   s.print(s.paths);
+        // };
 
         //returns an array of ids
         HomeFactory.getDrawings(s.userObj.uid)
         	.then((myDrawings)=>{
-            s.paths = [];
-        		myDrawings.forEach((drawing)=>{
-        		s.paths.push(drawing);
+                s.paths = [];
+                myDrawings.forEach((drawing)=>{
+                s.paths.push(drawing);
           });
 
-            console.log('s.paths:', s.paths);
-            $timeout(callPrint);
+            // $timeout(callPrint);
             
         });
 
@@ -32,23 +32,30 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
 
           };
 
+          s.deleteDrawing = function(drawingID) {
+            // let drawingID = MakeFactory.getDrawingObj().drawingID;
+            console.log('deleting this drawing:', drawingID);
+            MakeFactory.deleteDrawing(drawingID);
+            $window.location.reload();
+          };
+
         
-        s.print = function(drawingObj){
+        // s.print = function(drawingObj){
 
-            drawingObj.forEach((drawing)=>{
+        //     drawingObj.forEach((drawing)=>{
 
-        	  canvas = document.getElementById(`${drawing.drawingID}`);
-            let currentDrawing = drawing.drawing;
-            let currentPoint, offsetPoints;
-            let ctx = canvas.getContext('2d');
-                ctx.lineWidth = 10;
-                ctx.lineJoin = ctx.lineCap = 'round';
+        // 	canvas = document.getElementById(`${drawing.drawingID}`);
+        //     let currentDrawing = drawing.drawing;
+        //     let currentPoint, offsetPoints;
+        //     let ctx = canvas.getContext('2d');
+        //         ctx.lineWidth = 10;
+        //         ctx.lineJoin = ctx.lineCap = 'round';
 
-            var img = new Image();
-            img.onload = function(){
-              ctx.drawImage(img,0,0);
-            };
-            img.src = drawing.img;
+        //     var img = new Image();
+        //     img.onload = function(){
+        //       ctx.drawImage(img,0,0);
+        //     };
+        //     img.src = drawing.img;
             
           	  
             // currentDrawing.forEach((path)=>{
@@ -86,9 +93,9 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
 
             //         });
             //     });
-            });
+            // });
           
-        };
+        // };
 
         
 

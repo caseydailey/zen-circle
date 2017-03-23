@@ -1,12 +1,17 @@
 .navbar-form{
+	padding-top: 5em;
 	text-align: center;
 }
 .form-control {
 	border: 0;
 }
+.caption{
+	margin-bottom: 20px;
+}
 
 .btn {
 	border: 0;
+	margin: 10px;
 }
 
 .row{
@@ -14,12 +19,27 @@
 }
 
 .character{
-	font-size: 15em;
+	font-size: 20em;
+
 }
 
-#canvas{
-	margin-top: 50px;
-	text-align: center;
-	/*border: 2px solid red;*/
+.card{
+	margin-top: 5%;
+	border: .25px solid gainsboro;
+	box-shadow: 2px 2px 1px lightgrey;
+	margin-left: 33%;
 }
+
+.form-control-grey:focus {
+  border-color: #999;
+  outline: 0;
+  box-shadow: 2px 2px .5px lightgrey;
+
+}
+.btn{
+	float: right;
+	border: 2px solid red;
+	box-shadow: .5px .5px .1px lightgrey;
+} 
+
 

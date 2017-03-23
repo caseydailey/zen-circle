@@ -3,6 +3,7 @@
 app.controller('FindCtrl', function($scope, $window, $location, APIfactory, APIcreds, MakeFactory) {
 
 	let s = $scope;
+	s.blank = true;
 	
 	//make the call, split the resolve to handle case where jap.length is >1, and send to display
 	s.googleIt = function(APIcreds, word) {
@@ -18,9 +19,16 @@ app.controller('FindCtrl', function($scope, $window, $location, APIfactory, APIc
 		if($event.keyCode == 13){
 		  let word = $event.target.value;
 		  s.googleIt(APIcreds, word);
+		  s.word = word;
+		  console.log('s.word:', s.word);
 		  $event.target.value = "";
+		  s.blank = false;
 		}
 	};
+
+	s.clear = function(){
+		$window.location.reload();
+	}
 
 	//takes the split from googleIt and maps it to scope
 	s.display = function(japaneseArray){
@@ -38,8 +46,9 @@ app.controller('FindCtrl', function($scope, $window, $location, APIfactory, APIc
 
 
 	//when character is clicked, redirect to make mode
-	s.make = function(character) {
+	s.make = function(character, word) {
 		MakeFactory.setCharacter(character);
+		MakeFactory.setWord(word);
 		$window.location.href = '#!/make';
 	};
 
