@@ -4,9 +4,19 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
        
         let s = $scope;
         s.userObj = AuthFactory.getUserObj();
+        s.searchText = HomeFactory.searchFilter();
         let canvas = null;
         s.paths = [];
         s.hover=false;
+        s.showSearch = false;
+        s.deleting = false;
+
+        s.hideSearch = function($event){
+            if($event.keyCode == 13){
+            s.showSearch = false;
+            s.searchText.search = "";
+          }
+        };
 
         // let callPrint = function(){
         //   console.log('callPrint fired');
@@ -26,17 +36,15 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
         });
 
           s.edit = function(drawing){
-            console.log('s.edit running');
             MakeFactory.setDrawing(drawing);
             $window.location.href = '#!/edit';
-
           };
 
           s.deleteDrawing = function(drawingID) {
-            // let drawingID = MakeFactory.getDrawingObj().drawingID;
-            console.log('deleting this drawing:', drawingID);
             MakeFactory.deleteDrawing(drawingID);
-            $window.location.reload();
+            angular.element(`#${drawingID}`)
+                   .parent()
+                   .remove();
           };
 
         
