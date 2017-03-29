@@ -2,7 +2,14 @@
 
 app.factory('HomeFactory', function($q, $http, DBcreds, AuthFactory){
 	var myDrawings = [];
+
+	let searchFilter = function(){
+		return {
+			search: ""
+		};
+	};
 	
+//helper for getDrawings below iterates through data and assigns ids	
 	let assignIDs = function(drawings){
 		let drawingsData = drawings.data;
 		myDrawings = [];
@@ -13,7 +20,7 @@ app.factory('HomeFactory', function($q, $http, DBcreds, AuthFactory){
 		});
 	};
 
-		//gets the ids of users drawings
+		//gets the user drawing back from FB, assigning IDs from FB
 		let getDrawings = (userID) => {
 			return $q((resolve, reject) => {
 				$http.get(`${DBcreds.databaseURL}/drawings.json?orderBy="uid"&equalTo="${userID}"`)
@@ -49,6 +56,6 @@ app.factory('HomeFactory', function($q, $http, DBcreds, AuthFactory){
 		// 	});
 		// };
 
-	return{getDrawings};
+	return{getDrawings, searchFilter};
 
 });
