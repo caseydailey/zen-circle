@@ -1,9 +1,23 @@
 #canvas-container{
-	text-align: center;
+	/*text-align: center;*/
 }
 
 #canvas{
 	
-	align-self: center;
+	
+	text-align: center;
+}
+
+.buttons{
+	margin-top: 5em;
+	margin-right: 44%;
+}
+
+.make-btn{
+	border: none;
+}
+
+#caption{
+	text-align: center;
 }
 

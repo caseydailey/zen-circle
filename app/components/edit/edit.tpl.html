@@ -2,11 +2,11 @@
 
 
 
-  <div class="col-sm-6 col-md-4  card" ng-mouseout="offCanvas = true" ng-mouseover="offCanvas = false">
+  <div class="col-sm-6 col-md-4  card" ng-mouseout="offCanvas = true" ng-mouseover="offCanvas = false" ng-model="drawing">
   <div class="">
-     <canvas  id="canvas" width="400" height="400"></canvas>
-      <div class="caption">
-        <h3>{{ word }}</h3>
+     <canvas  id="canvas" width="500" height="400"></canvas>
+      <div id="caption" class="caption">
+        <h3 class="title">{{ drawing.word }}</h3>
         </div>
     </div>
   </div>
@@ -14,13 +14,22 @@
 
 
 
+<!-- buttons -->
+<div class="buttons">
+
+<p ng-if="offCanvas" class="btn make-btn" ng-click="patch()" ><span class="glyphicon glyphicon-save" aria-hidden="true" title="save edit"></span></p> 
+<p ng-if="offCanvas" class="btn make-btn" ng-click="removeLastStroke()"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></p>
+<p ng-if="offCanvas" class="btn make-btn" ng-click="deleteAttempt()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></p>
+
+<!-- <p ng-if="offCanvas" class="btn make-btn" ng-click="goHome()"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></p>
+
+<p ng-if="offCanvas" class="btn make-btn" ng-click="goToFind()"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
+</p> -->
+
+</div>
 
 
-<a ng-if="offCanvas" class="btn btn-default" type="a" ng-click="patchDrawing()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></a>
-<a ng-if="offCanvas" class="btn btn-default" type="a" ng-click="removeLastStroke()"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></a>
-<a ng-if="offCanvas" class="btn btn-default" type="a" ng-click="deleteDrawing()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-<a href="#!/home">
-<a ng-if="offCanvas" class="btn btn-default" type="a" ng-href="#!/home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
-</a>
+  
+
 
 

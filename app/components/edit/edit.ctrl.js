@@ -7,18 +7,21 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 	let ctx = canvas.getContext('2d');
 	let userID = AuthFactory.getUserObj().uid;
 	s.offCanvas = false;
+	s.drawing;
+
 
 	
 
 	s.render = function(drawing){
 
-	      console.log('rendering drawing:', drawing);
+		  console.log('rendering', drawing);
+	      
 	      ctx.lineWidth = 10;
 	      ctx.lineJoin = ctx.lineCap = 'round';
 
 	      drawing.forEach((path)=>{
 	      
-	      console.log('rendering path:', path);
+	      
 
 	        path.forEach((point)=>{
 
@@ -130,18 +133,23 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 
 	        s.printEdit = function(){
 	        console.log('printEdit running');
-	        var drawing = MakeFactory.getDrawing();
+	        var drawingObj = MakeFactory.getDrawingObj();
 	        console.log('drawing from make.fac:', drawing);
+	        s.drawing = drawingObj;
 	        $timeout();
-	        s.render(drawing);	
+	        canvas.style.backgroundImage = `url(${drawingObj.background})`;
+	        s.render(drawingObj.drawing);	
 	        };
 
 	        s.printEdit();
 	         
 
 	        s.patch = function(){
-	          let drawingID = MakeFactory.getDrawingObj().drawingID;
-	          MakeFactory.patchDrawing(drawingID, drawing);
+	          let drawingObj = MakeFactory.getDrawingObj();
+	          drawingObj.img = canvas.toDataURL();
+	          MakeFactory.patchDrawing(drawingObj);
+	          $window.location.href = '#!/home';
+	          console.log('drawingObj in ctrl patch:', drawing);
 	        };
 
 	        s.removeLastStroke = function(){

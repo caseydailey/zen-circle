@@ -62,13 +62,28 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 		});
 	};
 
-	let patchDrawing = function(drawingID, drawing){
+	let patchDrawing = function(drawingObj){
+		console.log('drawing in patch:', drawingObj);
+		console.log('${drawingObj.drawingID in patch:', drawingObj.drawingID);
+		console.log('${drawingObj.drawing in patch:', drawingObj.drawing);
 		return $q((resolve, reject)=>{
-			$http.patch(`${DBcreds.databaseURL}/drawings/${drawingID}.json`,
-				angular.toJson(drawing));
+			$http.patch(`${DBcreds.databaseURL}/drawings/${drawingObj.drawingID}.json`,
+				angular.toJson(drawingObj));
 		});
 	};
 
-	return{getCharacter, setCharacter, save, setDrawing, getDrawing, deleteDrawing, getDrawingObj, setWord, getWord};
+	return {
+
+		   getCharacter,
+		   setCharacter,
+		   save, 
+		   setDrawing, 
+		   getDrawing, 
+		   deleteDrawing, 
+		   getDrawingObj, 
+		   setWord, 
+		   getWord, 
+		   patchDrawing
+		};
 
 });

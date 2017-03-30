@@ -11,19 +11,21 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
         var background;
         s.word = MakeFactory.getWord();
         s.offCanvas = false;
-        
+        s.saving = false;
+
+  //this is ridiculous and unnecessarily complicated...      
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
     	    console.log('s.character:',s.character);
           if(s.character.length > 1){
             s.character.shift();
-            console.log(s.character);
+            // console.log(s.character);
             ctx.font = "300px serif";
             ctx.textAlign="center";
             ctx.strokeText(s.character[0], 200, 300);
             background = canvas.toDataURL();
             ctx.clearRect(0,0, 400, 400);
-            console.log('background:', background);
+            // console.log('background:', background);
             canvas.style.backgroundImage = `url(${background})`;
 
           } else {
@@ -32,7 +34,7 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
           ctx.strokeText(s.character[0], 200, 300);
           background = canvas.toDataURL();
           ctx.clearRect(0,0, 400, 400);
-          console.log('background:', background);
+          // console.log('background:', background);
           canvas.style.backgroundImage = `url(${background})`;
 
         	}
@@ -48,10 +50,12 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
             uid: userID,
             drawing: drawing,
             img: dataURL,
-            word: s.word
+            word: s.word,
+            background: background
           };
           MakeFactory.save(drawingData).then(()=>{
-          setTimeout(500);
+          s.saving = true;
+          setTimeout(2000);
             $window.location.href = '#!/home';
           });
           
@@ -60,12 +64,21 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
         s.removeLastStroke = function(){
           let lastPath = drawing.length-1;
           drawing.splice(lastPath);
+          s.display();
           s.render(drawing);
         };
 
         s.deleteAttempt = function(){
           ctx.clearRect(0,0, 400, 400);
           s.display();
+        };
+
+        s.goToFind = function(){
+          $window.location.href = '#!/find';
+        };
+
+        s.goHome = function(){
+          $window.location.href = '#!/home';
         };
 
 

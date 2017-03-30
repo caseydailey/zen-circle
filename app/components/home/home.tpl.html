@@ -34,11 +34,11 @@
   <!-- row -->
   <div class="row card-container">
   <!-- card -->
-    <div ng-mouseover="hover = true" ng-mouseout="hover = false" class="col-sm-6 col-md-4" id="home-card" ng-repeat="drawing in paths | filter:  searchText.search">
+    <div ng-mouseover="hover = true" ng-mouseout="hover = false" class="col-sm-12 col-md-6 col-lg-4" id="home-card" ng-repeat="drawing in paths | filter:  searchText.search">
       <div id="{{ drawing.drawingID }}">
         <img ng-src="{{ drawing.img }}" alt="japanese kanji for {{ drawing.word }}">
         <div class="caption">
-          <h3 class="title">{{ drawing.word }}</h3 class="title">
+          <h3 class="title">{{ drawing.word }}</h3>
 
           <!-- edit button -->
          
@@ -54,8 +54,8 @@
           
           <!-- delete alert-->
          <div  ng-if="deleting" class="alert alert-danger alert-dismissible" role="alert">
-           <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button><p>are you sure you want to <a href="" ng-click="deleteDrawing(drawing.drawingID)" class="alert-link">delete</a>
-this drawing?</p>
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button><p>are you sure you want to <a href="" ng-click="deleteDrawing(drawing.drawingID)" class="alert-link">delete this drawing?</a>
+</p>
          </div>
           
         </div>

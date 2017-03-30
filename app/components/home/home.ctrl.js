@@ -36,6 +36,7 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
         });
 
           s.edit = function(drawing){
+            console.log('drawing to edit', drawing);
             MakeFactory.setDrawing(drawing);
             $window.location.href = '#!/edit';
           };
