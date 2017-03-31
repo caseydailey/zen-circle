@@ -1,13 +1,11 @@
 
-
-
-
+<!-- card with canvas -->
   <div class="col-sm-6 col-md-4  card" ng-mouseout="offCanvas = true" ng-mouseover="offCanvas = false" ng-model="drawing">
   <div class="">
      <canvas  id="canvas" width="500" height="400"></canvas>
       <div id="caption" class="caption">
         <h3 class="title">{{ drawing.word }}</h3>
-        </div>
+      </div>
     </div>
   </div>
 
@@ -21,13 +19,11 @@
 <p ng-if="offCanvas" class="btn make-btn" ng-click="removeLastStroke()"><span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span></p>
 <p ng-if="offCanvas" class="btn make-btn" ng-click="deleteAttempt()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></p>
 
-<!-- <p ng-if="offCanvas" class="btn make-btn" ng-click="goHome()"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></p>
-
-<p ng-if="offCanvas" class="btn make-btn" ng-click="goToFind()"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></p>
-</p> -->
-
 </div>
 
+<!-- end buttons -->
+
+<!-- ngToast -->
 <toast id="success-message"></toast>
 
 

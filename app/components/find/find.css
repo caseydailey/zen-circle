@@ -1,3 +1,10 @@
+/********
+
+search form
+
+***********/
+
+
 .navbar-form{
 	padding-top: 10em;
 	text-align: center;
@@ -8,6 +15,20 @@
 	font-size: 2em;
 	font-weight: 200;
 }
+
+.form-control-grey:focus {
+  border-color: #999;
+  outline: 0;
+  box-shadow: 2px 2px .5px lightgrey;
+  
+
+}
+
+/*******
+
+character card
+
+**********/
 .caption{
 	margin-bottom: 20px;
 }
@@ -33,13 +54,7 @@
 	margin-left: 33%;
 }
 
-.form-control-grey:focus {
-  border-color: #999;
-  outline: 0;
-  box-shadow: 2px 2px .5px lightgrey;
-  
 
-}
 .btn{
 	float: right;
 	border: 2px solid red;
