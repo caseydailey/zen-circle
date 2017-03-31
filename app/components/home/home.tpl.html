@@ -21,7 +21,7 @@
 
  <form ng-if="showSearch" class="" role="search">
    <div class="form-group home-search-container">
-       <input autofocus="true" ng-model="searchText.search" ng-keypress="hideSearch($event)" type="text" class="form-control form-control-grey home-search" placeholder="search you work"> 
+       <input autofocus="true" ng-model="searchText.search" ng-keyup="hideSearch($event)" type="text" class="form-control form-control-grey home-search" placeholder="search you work"> 
    </div>
  </form>
 </div>
