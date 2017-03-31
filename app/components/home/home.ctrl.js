@@ -12,6 +12,7 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
         s.deleting = false;
 
         s.hideSearch = function($event){
+          console.log('s.searchText:', s.searchText);
             if($event.keyCode == 13){
             s.showSearch = false;
             s.searchText.search = "";
