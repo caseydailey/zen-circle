@@ -28,7 +28,7 @@ app.controller('FindCtrl', function($scope, $window, $location, APIfactory, APIc
 
 	s.clear = function(){
 		$window.location.reload();
-	}
+	};
 
 	//takes the split from googleIt and maps it to scope
 	s.display = function(japaneseArray){

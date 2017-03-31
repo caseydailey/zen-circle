@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, AuthFactory){
+app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, AuthFactory, ngToast){
 	
 	let s = $scope;
 	let canvas = document.getElementById('canvas');
@@ -142,13 +142,29 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 	        };
 
 	        s.printEdit();
+
+	        s.saveMessage = function() {
+	          console.log('saveMessage fired');
+	              ngToast.create({  
+	                content: 'Edit Saved!',
+	                dismissButton: true,
+	                dismissButtonHtml: `<span class="glyphicon glyphicon-home"></span>`,
+	                onDismiss: s.goHome
+
+	              });
+	           };
+
+	        s.goHome = function(){
+	        	$window.location.href = '#!/home';
+	        };
 	         
 
 	        s.patch = function(){
 	          let drawingObj = MakeFactory.getDrawingObj();
 	          drawingObj.img = canvas.toDataURL();
 	          MakeFactory.patchDrawing(drawingObj);
-	          $window.location.href = '#!/home';
+	          $timeout();
+	          s.saveMessage();
 	          console.log('drawingObj in ctrl patch:', drawing);
 	        };
 

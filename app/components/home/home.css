@@ -74,3 +74,10 @@
   margin: .5em 2em; 
  display: inline-block;
 }
+
+.delete-warning{
+  max-height: 15%;
+}
+
+
+
