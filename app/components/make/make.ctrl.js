@@ -23,6 +23,7 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
           console.log('saveMessage fired');
               ngToast.create({  
                 content: 'Drawing Saved!',
+                timeout: 1000,
                 dismissButton: true,
                 dismissButtonHtml: `<span class="glyphicon glyphicon-home"></span>`,
                 onDismiss: s.goHome
@@ -40,18 +41,18 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
           if(s.character.length > 1){
             s.character.shift();
             // console.log(s.character);
-            ctx.font = "300px serif";
+            ctx.font = "300px Noto Sans Japanese";
             ctx.textAlign="center";
-            ctx.strokeText(s.character[0], 200, 300);
+            ctx.strokeText(s.character[0],200, 300);
             background = canvas.toDataURL();
             ctx.clearRect(0,0, 500, 400);
             // console.log('background:', background);
             canvas.style.backgroundImage = `url(${background})`;
 
           } else {
-          ctx.font = "300px serif";
+          ctx.font = "300px Noto Sans Japanese";
           ctx.textAlign="center";
-          ctx.strokeText(s.character[0], 200, 300);
+          ctx.strokeText(s.character[0],200, 300);
           background = canvas.toDataURL();
           ctx.clearRect(0,0, 500, 400);
           // console.log('background:', background);

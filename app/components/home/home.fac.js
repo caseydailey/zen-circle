@@ -27,6 +27,7 @@ app.factory('HomeFactory', function($q, $http, DBcreds, AuthFactory){
 				.then((drawings) => {
 					assignIDs(drawings);
 			        console.log('myDrawings line 22:', myDrawings);
+			        // Promise.race(myDrawings);
 			        resolve(myDrawings);
 				})
 				.catch((error) => {
