@@ -46,3 +46,4 @@ app.config(function($routeProvider) {
     	.otherwise('/');
 
     });
+

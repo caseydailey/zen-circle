@@ -2,7 +2,7 @@
 
 
 
-app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
+app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, AuthFactory, ngToast) {
         
         let s = $scope;
         let canvas = document.getElementById('canvas');
@@ -13,7 +13,27 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
         s.offCanvas = false;
         s.saving = false;
 
-  //this is ridiculous and unnecessarily complicated...      
+        
+        // ngToast.create({
+        //   className: 'success',
+        //   content: `<h2>hello there casey!</h2>`
+        // });
+
+        s.saveMessage = function() {
+          console.log('saveMessage fired');
+              ngToast.create({  
+                content: 'Drawing Saved!',
+                dismissButton: true,
+                dismissButtonHtml: `<span class="glyphicon glyphicon-home"></span>`,
+                onDismiss: s.goHome
+
+              });
+           };
+
+           // s.saveMessage();
+
+
+  //this is ridiculous and unnecessarily complicated... fix.     
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
     	    console.log('s.character:',s.character);
@@ -24,7 +44,7 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
             ctx.textAlign="center";
             ctx.strokeText(s.character[0], 200, 300);
             background = canvas.toDataURL();
-            ctx.clearRect(0,0, 400, 400);
+            ctx.clearRect(0,0, 500, 400);
             // console.log('background:', background);
             canvas.style.backgroundImage = `url(${background})`;
 
@@ -33,19 +53,21 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
           ctx.textAlign="center";
           ctx.strokeText(s.character[0], 200, 300);
           background = canvas.toDataURL();
-          ctx.clearRect(0,0, 400, 400);
+          ctx.clearRect(0,0, 500, 400);
           // console.log('background:', background);
           canvas.style.backgroundImage = `url(${background})`;
 
         	}
         };
+          
 
         s.display();
 
 
         s.save = function(){
+          s.saveMessage();
           var dataURL = canvas.toDataURL();
-          console.log(dataURL);
+          // console.log(dataURL);
           var drawingData = {
             uid: userID,
             drawing: drawing,
@@ -54,9 +76,7 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
             background: background
           };
           MakeFactory.save(drawingData).then(()=>{
-          s.saving = true;
-          setTimeout(2000);
-            $window.location.href = '#!/home';
+          console.log('message saved');
           });
           
         };
@@ -69,7 +89,7 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
         };
 
         s.deleteAttempt = function(){
-          ctx.clearRect(0,0, 400, 400);
+          ctx.clearRect(0,0, 500, 400);
           s.display();
         };
 
@@ -155,7 +175,7 @@ app.controller('MakeCtrl', function($scope, $window, MakeFactory, AuthFactory) {
 
     s.render = function(drawing){
           
-          ctx.clearRect(0,0, 400, 400);
+          ctx.clearRect(0,0, 500, 400);
           s.display();
 
           let currentPoint;

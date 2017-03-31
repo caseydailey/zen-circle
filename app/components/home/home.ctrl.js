@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFactory, HomeFactory, MakeFactory) {
+app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFactory, HomeFactory, MakeFactory, ngToast) {
        
         let s = $scope;
         s.userObj = AuthFactory.getUserObj();
@@ -42,71 +42,23 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
           };
 
           s.deleteDrawing = function(drawingID) {
+            
             MakeFactory.deleteDrawing(drawingID);
             angular.element(`#${drawingID}`)
                    .parent()
                    .remove();
           };
 
-        
-        // s.print = function(drawingObj){
-
-        //     drawingObj.forEach((drawing)=>{
-
-        // 	canvas = document.getElementById(`${drawing.drawingID}`);
-        //     let currentDrawing = drawing.drawing;
-        //     let currentPoint, offsetPoints;
-        //     let ctx = canvas.getContext('2d');
-        //         ctx.lineWidth = 10;
-        //         ctx.lineJoin = ctx.lineCap = 'round';
-
-        //     var img = new Image();
-        //     img.onload = function(){
-        //       ctx.drawImage(img,0,0);
-        //     };
-        //     img.src = drawing.img;
-            
-          	  
-            // currentDrawing.forEach((path)=>{
-
-            //   path.forEach((point)=>{
-
-        	  	// 	  currentPoint = { x: point.x, y: point.y };
-        	  
-            //   	      ctx.beginPath();
-              	      
-            //   	      ctx.globalAlpha = 1;
-            //   	      ctx.moveTo(currentPoint.x - 4, currentPoint.y - 4);
-            //   	      ctx.lineTo(currentPoint.x - 4, currentPoint.y - 4);
-            //   	      ctx.stroke();
-              	      
-            //   	      ctx.globalAlpha = 0.6;
-            //   	      ctx.moveTo(currentPoint.x - 2, currentPoint.y - 2);
-            //   	      ctx.lineTo(currentPoint.x - 2, currentPoint.y - 2);
-            //   	      ctx.stroke();
-              	      
-            //   	      ctx.globalAlpha = 0.4;
-            //   	      ctx.moveTo(currentPoint.x, currentPoint.y);
-            //   	      ctx.lineTo(currentPoint.x, currentPoint.y);
-            //   	      ctx.stroke();
-              	      
-            //   	      ctx.globalAlpha = 0.3;
-            //   	      ctx.moveTo(currentPoint.x + 2, currentPoint.y + 2);
-            //   	      ctx.lineTo(currentPoint.x + 2, currentPoint.y + 2);
-            //   	      ctx.stroke();
-              	      
-            //   	      ctx.globalAlpha = 0.2;
-            //   	      ctx.moveTo(currentPoint.x + 4, currentPoint.y + 4);
-            //   	      ctx.lineTo(currentPoint.x + 4, currentPoint.y + 4);
-            //   	      ctx.stroke();
-
-            //         });
-            //     });
-            // });
-          
-        // };
-
-        
-
+          s.deleteMessage = function(drawingID) {
+            console.log('drawingId in message:', drawingID);
+          console.log('deleteMessage fired');
+              ngToast.create({  
+                content: 'Drawing Deleted.',
+                timeout: 2000,
+                dismissButton: true,
+                dismissButtonHtml: `&times;`,
+                onDismiss: s.deleteDrawing(drawingID)
+              });
+           };
 	
 });

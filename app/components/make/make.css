@@ -9,7 +9,7 @@
 }
 
 .buttons{
-	margin-top: 5em;
+	margin-top: 3em;
 	margin-right: 44%;
 }
 
@@ -20,4 +20,22 @@
 #caption{
 	text-align: center;
 }
+
+toast{
+	list-style: none;
+}
+
+#success-message{
+
+	
+	max-width: 20%;
+	list-style: none;
+
+}
+
+
+
+
+
+
 
