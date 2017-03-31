@@ -9,19 +9,19 @@
     <h1 id="user-name"> {{ userObj.displayName }} </h1>
   <!-- menu -->
 
- <div class="dropdown find">
+ <div class="dropdown hamburger">
    <a class="dropdown-toggle find navbar-right" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
    <img src="../../../zen-circle-images/menu.png"></a>
    <ul class="dropdown-menu navbar navbar-right" aria-labelledby="dropdownMenu1">
-     <li><a href="#!/find">Find New</a></li>
+     <li><a href="#!/find">Find New Character</a></li>
      <li><a href="" ng-click="showSearch = true">Search Your Work</a></li>
      <li><a href="#">Logout</a></li>
    </ul>
  </div>
 
  <form ng-if="showSearch" class="" role="search">
-   <div class="form-group ">
-       <input autofocus="true" ng-model="searchText.search" ng-keypress="hideSearch($event)" type="text" class="form-control form-control-grey" placeholder="search you work"> 
+   <div class="form-group home-search-container">
+       <input autofocus="true" ng-model="searchText.search" ng-keypress="hideSearch($event)" type="text" class="form-control form-control-grey home-search" placeholder="search you work"> 
    </div>
  </form>
 </div>
