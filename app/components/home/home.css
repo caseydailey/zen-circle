@@ -1,4 +1,8 @@
-/*rubber stamp*/
+/*******
+
+user Info
+
+********/
 
 .hanko {
   
@@ -12,19 +16,7 @@
   margin: 10px 20px; 
 
 }
-/*.hanko::after {
-  position: static;
-  content: " ";
-  width: 100%;
-  height: auto;
-  min-height: 100%;
-  top: -10px;
-  left: -10px;
-  padding: 10px;
-  background: url(https://raw.github.com/domenicosolazzo/css3/master/img/noise.png) repeat;
-}*/
 
-/*user name*/
 
 #user-name {
 	display: inline-block;
@@ -37,7 +29,9 @@
   margin: 20px;
 }
 
-/*cards*/
+
+/*******  cards    ********/
+/*************************/
 .card-container {
 	margin-left: 15%;
   margin-top: 5%;
@@ -65,6 +59,12 @@
 }
 
 
+/***********
+
+menu
+
+ **********/
+
 
 .hamburger{
   float: right;
@@ -81,6 +81,12 @@
   margin-top: 5px;
   font-size: 1.5em;
 }
+
+/******
+
+search
+
+******/
 
 .home-search{
   font-size: 2em;

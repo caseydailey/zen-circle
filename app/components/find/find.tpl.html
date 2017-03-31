@@ -2,18 +2,12 @@
 <!-- input -->
 <form class="navbar-form" role="search" >
   <div class="form-group">
-      <input autofocus="true" ng-keypress="enter($event)" type="text" class="form-control form-control-grey" placeholder="enter search here"> 
+      <input autofocus="true" ng-keyup="enter($event)" type="text" class="form-control form-control-grey" placeholder="enter search here"> 
   </div>
 </form>
 
-<!-- display character -->
-<!-- <div class="row">
 
-	<p ng-click="make(character)" ng-repeat="character in japanese track by $index" class="character">{{character}}</p>
-
-  
-</div>
- -->
+<!-- card show if !blank -->
 
  <div class="row" ng-show="!blank">
    <div class="col-sm-6 col-md-4  card">

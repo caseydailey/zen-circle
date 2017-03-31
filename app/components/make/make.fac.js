@@ -7,70 +7,41 @@ app.factory('MakeFactory', function($window, $location, $http, $q, DBcreds){
 	var editDrawing;
 	var word;
 
-//getters and setters
-	
-	let setWord = function(w){
-		word = w;
-	};
-
-	let getWord = function(){
-		return word;
-	};
-
-
-	let setCharacter = function(character){
-		makeCharacter.push(character[0]);
-	};
-	
-	let getCharacter = function(character){
-		return makeCharacter;
-	};
-
-	let setDrawing = function(drawingobj){
+	//getters and setters
+	let setWord = (w) => word = w;
+	let getWord = () => word;
+	let setCharacter = (character) => makeCharacter.push(character[0]);
+	let getCharacter = (character) => makeCharacter;
+	let getDrawingObj =() => drawingObj;
+	let getDrawing = () => editDrawing;
+	let setDrawing = (drawingobj) => {
 		drawingObj = drawingobj;
 		editDrawing = drawingobj.drawing;
 	};
 
-	let getDrawingObj = function(){
-		return drawingObj;
-	};
 
-	let getDrawing = function(){
-		console.log('returning this from make.fac:', editDrawing);
-		return editDrawing;
-	};
-
-//save, update, delete
-
+	//save, update, delete
 	let save = (drawing) => {
 		return $q((resolve, reject) => {
 				$http.post(`${DBcreds.databaseURL}/drawings.json`,
 				angular.toJson(drawing))
-				.then((result) => {
-					console.log(result);
-					resolve(result);
-				})
-				.catch((error) => {
-					reject(error);
-				});
-			});
-		};
+				.then((result) => { resolve(result); })
+				.catch((error) => { reject(error);   });
+			});//end $q
+			};//end save
 
-	let deleteDrawing = function(drawingID) {
+	let deleteDrawing = (drawingID) => {
 		return $q((resolve, reject) => {
 			$http.delete(`${DBcreds.databaseURL}/drawings/${drawingID}.json`);
-		});
-	};
+		});//end $q
+		};//end deletDrawing
 
-	let patchDrawing = function(drawingObj){
-		console.log('drawing in patch:', drawingObj);
-		console.log('${drawingObj.drawingID in patch:', drawingObj.drawingID);
-		console.log('${drawingObj.drawing in patch:', drawingObj.drawing);
+	let patchDrawing = (drawingObj) => {
 		return $q((resolve, reject)=>{
 			$http.patch(`${DBcreds.databaseURL}/drawings/${drawingObj.drawingID}.json`,
-				angular.toJson(drawingObj));
-		});
-	};
+			angular.toJson(drawingObj));
+		}); //end $q
+		}; //end patchDrawing
 
 	return {
 

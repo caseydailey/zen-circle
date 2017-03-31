@@ -1,28 +1,28 @@
 "use strict";
 
 app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFactory, HomeFactory, MakeFactory, ngToast) {
-       
+      
+      //bind scope and initialize canvas variable 
         let s = $scope;
+        let canvas = null;
+      //get user search text. initialize paths, and set a few flags on the DOM for display handling
         s.userObj = AuthFactory.getUserObj();
         s.searchText = HomeFactory.searchFilter();
-        let canvas = null;
         s.paths = [];
         s.hover=false;
         s.showSearch = false;
         s.deleting = false;
 
+        //hides search input after enter key pressed and resets the search
         s.hideSearch = function($event){
-          console.log('s.searchText:', s.searchText);
+          console.log('s.searchText.search:', s.searchText.search);
             if($event.keyCode == 13){
             s.showSearch = false;
             s.searchText.search = "";
           }
         };
 
-        // let callPrint = function(){
-        //   console.log('callPrint fired');
-        //   s.print(s.paths);
-        // };
+        
 
         //returns an array of ids
         HomeFactory.getDrawings(s.userObj.uid)
@@ -31,35 +31,31 @@ app.controller('HomeCtrl', function($scope, $timeout, $window, $location, AuthFa
                 myDrawings.forEach((drawing)=>{
                 s.paths.push(drawing);
           });
-
-            // $timeout(callPrint);
-            
         });
 
+          //takes drawing object and updates the model with setDrawing and routes to edit
           s.edit = function(drawing){
-            console.log('drawing to edit', drawing);
             MakeFactory.setDrawing(drawing);
             $window.location.href = '#!/edit';
           };
 
+          //selects an element andbased on drawing and removes its parent with a little jqlite
           s.deleteDrawing = function(drawingID) {
-            
             MakeFactory.deleteDrawing(drawingID);
             angular.element(`#${drawingID}`)
                    .parent()
                    .remove();
           };
 
+          //creates a toast withngToastprovider which timesout in 2 secs and can be clicked to dismiss dismissal calls delete
           s.deleteMessage = function(drawingID) {
-            console.log('drawingId in message:', drawingID);
-          console.log('deleteMessage fired');
-              ngToast.create({  
-                content: 'Drawing Deleted.',
-                timeout: 2000,
-                dismissButton: true,
-                dismissButtonHtml: `&times;`,
-                onDismiss: s.deleteDrawing(drawingID)
-              });
-           };
+            ngToast.create({  
+            content: 'Drawing Deleted.',
+            timeout: 2000,
+            dismissButton: true,
+            dismissButtonHtml: `&times;`,
+            onDismiss: s.deleteDrawing(drawingID)
+          });
+        };
 	
 });
