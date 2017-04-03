@@ -15,7 +15,7 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
         var currentPath = [];
         
         //set some properties
-        ctx.lineWidth = 8;
+        ctx.lineWidth = 10;
         ctx.lineJoin = ctx.lineCap = 'round';
         s.word = MakeFactory.getWord();
         s.offCanvas = false;
@@ -41,15 +41,18 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
             ctx.lineWidth = 1;
             ctx.font = "300px serif";
             ctx.textAlign="center";
+            ctx.strokeStyle = "grey";
             ctx.strokeText(characterArray[0],200, 300);
             background = canvas.toDataURL();
             ctx.clearRect(0,0, 500, 400);
             canvas.style.backgroundImage = `url(${background})`;
-            ctx.lineWidth = 8;
+            //reset line props for draw
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 10;
           };
 
 
-        //this is ridiculous and unnecessarily complicated... fix.     
+        //if more than one character splice else dont then display()
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
           if(s.character.length > 1){
