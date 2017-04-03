@@ -39,7 +39,7 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 
         let doBackground = function(characterArray){
             ctx.lineWidth = 1;
-            ctx.font = "300px Noto Sans Japanese";
+            ctx.font = "300px serif";
             ctx.textAlign="center";
             ctx.strokeText(characterArray[0],200, 300);
             background = canvas.toDataURL();
