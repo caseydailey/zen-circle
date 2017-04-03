@@ -19,11 +19,9 @@
  </div>
 
 <!-- Search text input -->
- <form ng-if="showSearch" class="" role="search">
-   <div class="form-group home-search-container">
+   <div ng-if="showSearch" class="form-group home-search-container">
        <input autofocus="true" ng-model="searchText.search" ng-keyup="hideSearch($event)" type="text" class="form-control form-control-grey home-search" placeholder="search you work"> 
    </div>
- </form>
 </div> 
 <!-- end "nav" -->
 
