@@ -119,9 +119,11 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 	//prints background image and drawing on load
 	s.printEdit = function(){
 	var drawingObj = MakeFactory.getDrawingObj();
+	console.log('drawingObj in print:', drawingObj);
 	s.drawing = drawingObj;
 	$timeout();
 	canvas.style.backgroundImage = `url(${drawingObj.background})`;
+	console.log('drawingObj.drawing:', drawingObj.drawing );
 	s.render(drawingObj.drawing);	
 	};
 	//invoked on load
@@ -161,12 +163,17 @@ app.controller('EditCtrl', function($scope, $window, $timeout, MakeFactory, Auth
 	  s.render(drawing);
 	};
 
-	//this makes no sense
-	s.deleteAttempt = function(){
-	  ctx.clearRect(0,0, 400, 400);
-	  s.save();
-	  $window.location.href = '#!/home';
-	};
+	//clear canvas, print background, clear drawing array
+	// s.deleteAttempt = function(drawing){
+	//   drawing.drawing = "";
+	//   MakeFactory.setDrawing(drawing);
+	//   console.log('drawing in clear:', drawing);
+	//   MakeFactory.patchDrawing(drawing);
+	//   let clearedDrawing = MakeFactory.getDrawing();
+	//   console.log('clearedDrawing:', clearedDrawing);
+	//   ctx.clearRect(0,0, 400, 400);
+	//   canvas.style.backgroundImage = `url(${drawing.background})`;
+	// };
 
 	//deletes drawing from firebase and clears the canvas
 	s.deleteDrawing = function() {
