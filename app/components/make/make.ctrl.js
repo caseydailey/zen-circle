@@ -29,7 +29,7 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
         s.saveMessage = function() {
           ngToast.create({  
             content: 'Drawing Saved!',
-            timeout: 1000,
+            timeout: 2000,
             dismissButton: true,
             dismissButtonHtml: `<span class="glyphicon glyphicon-home"></span>`,
             onDismiss: s.goHome
@@ -38,13 +38,17 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
         };
 
         let doBackground = function(characterArray){
+            //set characterictics of the line
             ctx.lineWidth = 1;
-            ctx.font = "300px serif";
+            ctx.font = "300px noto sans japanese";
             ctx.textAlign="center";
             ctx.strokeStyle = "grey";
+            //write the character to the canvas
             ctx.strokeText(characterArray[0],200, 300);
+            //save it as an image then clear the strokedtext
             background = canvas.toDataURL();
             ctx.clearRect(0,0, 500, 400);
+            //set saved image as background
             canvas.style.backgroundImage = `url(${background})`;
             //reset line props for draw
             ctx.strokeStyle = "black";
@@ -52,7 +56,7 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
           };
 
 
-        //if more than one character splice else dont then display()
+        //if more than one character splice (else dont) then display()
         s.display = function(){
 	        s.character = MakeFactory.getCharacter();
           if(s.character.length > 1){
@@ -70,7 +74,6 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
         s.save = function(){
           s.saveMessage();
           var dataURL = canvas.toDataURL();
-
           var drawingData = {
                 uid: userID,
                 drawing: drawing,
@@ -89,11 +92,11 @@ app.controller('MakeCtrl', function($scope, $window, $timeout, MakeFactory, Auth
           s.render(drawing);
         };
 
-        //clears current drawing and re-displays background img
-        s.deleteAttempt = function(){
-          ctx.clearRect(0,0, 500, 400);
-          s.display();
-        };
+        // //clears current drawing and re-displays background img
+        // s.deleteAttempt = function(){
+        //   ctx.clearRect(0,0, 500, 400);
+        //   s.display();
+        // };
 
         //goes to find
         s.goToFind = function(){
