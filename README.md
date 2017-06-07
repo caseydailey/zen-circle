@@ -8,13 +8,7 @@
   Zen Circle will enable the user to find Japanese characters for English Words and trace them on an HTML canvas.
   The user can then save their work and revisit it anytime from their **home** page.
 
-### To Run
 
-  ```
-  git clone https://github.com/caseydailey/zen-circle
-  cd lib
-  npm install
-  ```
 
 #### Project Goals
 
